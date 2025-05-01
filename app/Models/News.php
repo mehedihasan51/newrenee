@@ -14,6 +14,8 @@ class News extends Model
         'title',
         'sub_title',
         'category',
+        'report',
+        'news_type',
         'name',
         'description',
         'image',

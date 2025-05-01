@@ -47,12 +47,16 @@ class NewsController extends Controller
                 ->addColumn('action', function ($data) {
                     return '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
 
-                                <a href="#" type="button" onclick="goToEdit(' . $data->id . ')" class="btn btn-primary fs-14 text-white delete-icn" title="Delete">
+                                <a href="#" type="button" onclick="goToEdit(' . $data->id . ')" class="btn btn-primary fs-14 text-white delete-icn" title="Edit">
                                     <i class="fe fe-edit"></i>
                                 </a>
 
                                 <a href="#" type="button" onclick="showDeleteConfirm(' . $data->id . ')" class="btn btn-danger fs-14 text-white delete-icn" title="Delete">
                                     <i class="fe fe-trash"></i>
+                                </a>
+                                
+                                <a href="#" type="button" onclick="viewAll(' . $data->id . ')" class="btn btn-green fs-14 text-white delete-icn" title="Delete">
+                                    <i class="fa fa-eye"></i>
                                 </a>
                             </div>';
                 })
@@ -76,13 +80,17 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'name' => 'nullable|string|max:50',
-            'sub_title' => 'nullable|string|max:50',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'name' => 'required|string|max:50',
+            'title' => 'required|string|max:50',
+            'news_type' => 'required|in:normal,live',
+            'description' => 'required|string|max:50',
+            'sub_title' => 'required|string|max:50',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
 
         ]);
 
         try {
+
             if ($request->hasFile('image')) {
                 $validate['image'] = Helper::fileUpload($request->file('image'), 'image', time() . '_' . getFileName($request->file('image')));
 
@@ -95,8 +103,8 @@ class NewsController extends Controller
             session()->put('t-error', $e->getMessage());
         }
 
-        // return redirect()->route('news.index')->with('success', 'News created successfully');
-        return redirect()->back()->with('success', 'News created successfully');
+        return redirect()->route('admin.news.index')->with('success', 'News created successfully');
+        // return redirect()->back()->with('success', 'News created successfully');
     }
 
     /**
@@ -124,27 +132,30 @@ class NewsController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required|string|max:50',
+            'title' => 'required|string|max:50',
+            'news_type' => 'required|in:normal,live',
+            'description' => 'nullable|string|max:50',
             'sub_title' => 'nullable|string|max:50',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         try {
-            $social = SocialLink::findOrFail($id);
+            $news = News::findOrFail($id);
 
-            if ($request->hasFile('icon')) {
-                if ($social->icon && file_exists(public_path($social->icon))) {
-                    Helper::fileDelete(public_path($social->icon));
+            if ($request->hasFile('image')) {
+                if ($news->image && file_exists(public_path($news->image))) {
+                    Helper::fileDelete(public_path($news->image));
                 }
                 $validate['image'] = Helper::fileUpload($request->file('image'), 'image', time() . '_' . getFileName($request->file('image')));
             }
 
-            $social->update($validate);
-            session()->put('t-success', 'SocialLink updated successfully');
+            $news->update($validate);
+            session()->put('t-success', 'News updated successfully');
         } catch (Exception $e) {
             session()->put('t-error', $e->getMessage());
         }
 
-        return redirect()->route('news.index');
+        return redirect()->route('admin.news.index');
     }
 
     /**

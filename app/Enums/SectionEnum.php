@@ -19,6 +19,7 @@ enum SectionEnum: string
     case NEWS_SECTION = 'news_section';
     case NEWS_SECTIONS = 'news_sections';
 
+
     case FAQ_ITEM = 'faq_item';
     case FAQ_ITEMS = 'faq_items';
     case FAQ = 'faq';

@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('title')->nullable();
-            $table->string('sub_title')->nullable();
-            $table->enum('category', ['news', 'event'])->nullable();
-            $table->string('description')->nullable();
-            $table->string('image')->nullable();
-            $table->enum('report', ['normal', 'live'])->default('normal');
-            $table->enum('status', ['active', 'live'])->default('active');
+            $table->string('name');
+            $table->string('title');
+            $table->string('sub_title');
+            $table->string('description');
+            $table->string('image');
+            $table->enum('news_type', ['normal', 'live'])->default('normal');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
             $table->softDeletes();
         });

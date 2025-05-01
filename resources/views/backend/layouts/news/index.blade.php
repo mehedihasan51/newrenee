@@ -16,11 +16,11 @@
             <!-- PAGE-HEADER -->
             <div class="page-header">
                 <div>
-                    <h1 class="page-title">News Category</h1>
+                    <h1 class="page-title">News Section</h1>
                 </div>
                 <div class="ms-auto pageheader-btn">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">News Category</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">News Section</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Index</li>
                     </ol>
                 </div>
@@ -30,11 +30,11 @@
             <!-- PAGE-HEADER -->
             <div class="page-header">
                 <div>
-                    <h1 class="page-title">Category</h1>
+                    <h1 class="page-title">News</h1>
                 </div>
                 <div class="ms-auto pageheader-btn">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">Category</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">News</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Index</li>
                     </ol>
                 </div>
