@@ -47,15 +47,15 @@ class NewsController extends Controller
                 ->addColumn('action', function ($data) {
                     return '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
 
-                                <a href="#" type="button" onclick="goToEdit(' . $data->id . ')" class="btn btn-primary fs-14 text-white delete-icn" title="Edit">
+                                <a href="#" type="button" onclick="event.preventDefault(); goToEdit(' . $data->id . ')" class="btn btn-primary fs-14 text-white delete-icn" title="Edit">
                                     <i class="fe fe-edit"></i>
                                 </a>
 
-                                <a href="#" type="button" onclick="showDeleteConfirm(' . $data->id . ')" class="btn btn-danger fs-14 text-white delete-icn" title="Delete">
+                                <a href="#" type="button" onclick="event.preventDefault(); showDeleteConfirm(' . $data->id . ')" class="btn btn-danger fs-14 text-white delete-icn" title="Delete">
                                     <i class="fe fe-trash"></i>
                                 </a>
                                 
-                                <a href="#" type="button" onclick="viewAll(' . $data->id . ')" class="btn btn-green fs-14 text-white delete-icn" title="Delete">
+                                <a href="#" type="button" onclick="event.preventDefault(); viewModalContent(' . $data->id . ')" class="btn btn-green fs-14 text-white delete-icn" title="view">
                                     <i class="fa fa-eye"></i>
                                 </a>
                             </div>';
@@ -110,10 +110,12 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(News $news, $id)
+
+    public function show($id)
     {
         $news = News::findOrFail($id);
-        return view('backend.layouts.news.edit', compact('news'));
+        $news->image_url = asset('/' . $news->image);
+        return response()->json($news);
     }
 
     /**
