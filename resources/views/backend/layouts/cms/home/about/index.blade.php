@@ -41,7 +41,7 @@ $url = 'admin.cms.'.$name.'.'.$section;
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <form method="POST" action="{{ route('admin.cms.home.banner.content') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.cms.home.about.content') }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -51,6 +51,34 @@ $url = 'admin.cms.'.$name.'.'.$section;
                                             <label for="title" class="form-label">Title:</label>
                                             <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Enter here title" id="title" value="{{ $data->title ?? '' }}">
                                             @error('title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="sub_title" class="form-label">Sub Title:</label>
+                                            <input type="text" class="form-control @error('sub_title') is-invalid @enderror" name="sub_title" placeholder="Enter here sub title" id="sub_title" value="{{ $data->sub_title ?? '' }}">
+                                            @error('sub_title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="name" class="form-label">Name:</label>
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Enter here name" id="name" value="{{ $data->name ?? '' }}">
+                                            @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

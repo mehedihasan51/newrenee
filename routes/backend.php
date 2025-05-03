@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Backend\MeetLeaderController;
 use App\Http\Controllers\Web\Backend\ChatController;
 use App\Http\Controllers\Web\Backend\NewsController;
 use App\Http\Controllers\Web\Backend\PageController;
@@ -14,17 +15,20 @@ use App\Http\Controllers\Web\Backend\Access\RoleController;
 use App\Http\Controllers\Web\Backend\Access\UserController;
 use App\Http\Controllers\Web\Backend\SubcategoryController;
 use App\Http\Controllers\Web\Backend\Settings\OtherController;
+use App\Http\Controllers\Web\Backend\CMS\Web\Faq\FaqController;
 use App\Http\Controllers\Web\Backend\Settings\SocialController;
 use App\Http\Controllers\Web\Backend\Settings\StripeController;
 use App\Http\Controllers\Web\Backend\Settings\CaptchaController;
 use App\Http\Controllers\Web\Backend\Settings\ProfileController;
 use App\Http\Controllers\Web\Backend\Settings\SettingController;
 use App\Http\Controllers\Web\Backend\Access\PermissionController;
-use App\Http\Controllers\Web\Backend\CMS\Web\Faq\FaqController;
 use App\Http\Controllers\Web\Backend\Settings\FirebaseController;
 use App\Http\Controllers\Web\Backend\Settings\GoogleMapController;
 use App\Http\Controllers\Web\Backend\Settings\MailSettingController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeBannerController;
+use App\Http\Controllers\Web\Backend\CMS\Web\Home\AboutSectionController;
+use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeAboutController;
+use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeContributeController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeCustomerController;
 // use App\Http\Controllers\Web\Backend\CMS\Web\News\NewsController;
 
@@ -99,6 +103,18 @@ Route::controller(NewsController::class)->prefix('news')->name('news.')->group(f
     Route::get('/status/{id}', 'status')->name('status');
 });
 
+// meet_leader
+Route::controller(MeetLeaderController::class)->prefix('leader')->name('leader.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/show/{id}', 'show')->name('show');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::post('/update/{id}', 'update')->name('update');
+    Route::delete('/delete/{id}', 'destroy')->name('destroy');
+    Route::get('/status/{id}', 'status')->name('status');
+});
+
 
 Route::get('subscriber', [SubscriberController::class, 'index'])->name('subscriber.index');
 
@@ -116,6 +132,36 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
     //Home Banner
     Route::prefix('home/banner')->name('home.banner.')->controller(HomeBannerController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::get('/{id}/status', 'status')->name('status');
+
+        Route::put('/content', 'content')->name('content');
+    });
+
+
+    // Home About Section
+    Route::prefix('home/about')->name('home.about.')->controller(HomeAboutController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::get('/{id}/status', 'status')->name('status');
+
+        Route::put('/content', 'content')->name('content');
+    });
+
+    // Home Contribute Section
+
+    Route::prefix('home/contribute')->name('home.contribute.')->controller(HomeContributeController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');

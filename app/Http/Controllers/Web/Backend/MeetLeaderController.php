@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Web\Backend;
 
-use App\Helpers\Helper;
-use App\Models\SocialLink;
+use App\Models\meet_leader;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\News;
-use Exception;
-use Illuminate\Http\JsonResponse;
 use Yajra\DataTables\Facades\DataTables;
 
-
-class NewsController extends Controller
+use App\Helpers\Helper;
+use App\Models\SocialLink;
+use App\Http\Controllers\Controller;
+use Exception;
+use Illuminate\Http\JsonResponse;
+class MeetLeaderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +19,7 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = News::all();
+            $data = meet_leader::all();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('image', function ($data) {
@@ -55,23 +54,24 @@ class NewsController extends Controller
                                     <i class="fe fe-trash"></i>
                                 </a>
                                 
-                                <a href="#" type="button" onclick="event.preventDefault(); viewModalContent(' . $data->id . ')" class="btn btn-green fs-14 text-white delete-icn" title="view">
-                                     <i class="fe fe-eye"></i>
+                                <a href="#" type="button" onclick="event.preventDefault(); viewModalContent(' . $data->id . ')" class="btn btn-green fs-14 text-white delete-icn" title="View">
+                                    <i class="fe fe-eye"></i>
                                 </a>
                             </div>';
                 })
                 ->rawColumns(['image', 'status', 'action'])
                 ->make();
         }
-        return view("backend.layouts.news.index");
+        return view("backend.layouts.leader.index");
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('backend.layouts.news.create');
+        return view('backend.layouts.leader.create');
     }
 
     /**
@@ -82,9 +82,9 @@ class NewsController extends Controller
         $validate = $request->validate([
             'name' => 'required|string|max:50',
             'title' => 'required|string|max:50',
-            'news_type' => 'required|in:normal,live',
+            'position' => 'required|string|max:50',
             'description' => 'required|string|max:50',
-            'sub_title' => 'required|string|max:50',
+            'subtitle' => 'required|string|max:50',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
 
         ]);
@@ -96,15 +96,15 @@ class NewsController extends Controller
 
             }
 
-            News::create($validate);
+            meet_leader::create($validate);
 
-            session()->put('t-success', 'News created successfully');
+            session()->put('t-success', 'Leader created successfully');
         } catch (Exception $e) {
             session()->put('t-error', $e->getMessage());
         }
 
-        return redirect()->route('admin.news.index')->with('success', 'News created successfully');
-        // return redirect()->back()->with('success', 'News created successfully');
+        return redirect()->route('admin.leader.index')->with('success', 'Leader created successfully');
+        // return redirect()->back()->with('success', 'Leader created successfully');
     }
 
     /**
@@ -113,18 +113,18 @@ class NewsController extends Controller
 
     public function show($id)
     {
-        $news = News::findOrFail($id);
-        $news->image_url = asset('/' . $news->image);
-        return response()->json($news);
+        $leader = meet_leader::findOrFail($id);
+        $leader->image_url = asset('/' . $leader->image);
+        return response()->json($leader);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(News $news, $id)
+    public function edit(meet_leader $leader, $id)
     {
-        $news = News::findOrFail($id);
-        return view('backend.layouts.news.edit', compact('news'));
+        $leader = meet_leader::findOrFail($id);
+        return view('backend.layouts.leader.edit', compact('leader'));
     }
 
     /**
@@ -135,29 +135,29 @@ class NewsController extends Controller
         $validate = $request->validate([
             'name' => 'required|string|max:50',
             'title' => 'required|string|max:50',
-            'news_type' => 'required|in:normal,live',
+            'position' => 'required|string|max:50',
             'description' => 'nullable|string|max:50',
             'sub_title' => 'nullable|string|max:50',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         try {
-            $news = News::findOrFail($id);
+            $leader = meet_leader::findOrFail($id);
 
             if ($request->hasFile('image')) {
-                if ($news->image && file_exists(public_path($news->image))) {
-                    Helper::fileDelete(public_path($news->image));
+                if ($leader->image && file_exists(public_path($leader->image))) {
+                    Helper::fileDelete(public_path($leader->image));
                 }
                 $validate['image'] = Helper::fileUpload($request->file('image'), 'image', time() . '_' . getFileName($request->file('image')));
             }
 
-            $news->update($validate);
-            session()->put('t-success', 'News updated successfully');
+            $leader->update($validate);
+            session()->put('t-success', 'Leader updated successfully');
         } catch (Exception $e) {
             session()->put('t-error', $e->getMessage());
         }
 
-        return redirect()->route('admin.news.index');
+        return redirect()->route('admin.leader.index');
     }
 
     /**
@@ -166,26 +166,26 @@ class NewsController extends Controller
     public function destroy(string $id)
     {
         try {
-            $data = News::findOrFail($id);
+            $data = meet_leader::findOrFail($id);
             if ($data->image && file_exists(public_path($data->image))) {
                 Helper::fileDelete(public_path($data->image));
             }
             $data->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Your action was successful!'
+                'message' => 'Leader deleted successfully!'
             ]);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Your action was successful!'
+                'message' => 'Error deleting leader: ' . $e->getMessage()
             ]);
         }
     }
 
     public function status(int $id): JsonResponse
     {
-        $data = News::findOrFail($id);
+        $data = meet_leader::findOrFail($id);
         if (!$data) {
             return response()->json([
                 'status' => 'error',

@@ -13,8 +13,17 @@ enum SectionEnum: string
     case HEROS = 'heros';
 
 
+
+
     case CUSTOMER_SECTION = 'customer_section';
     case CUSTOMER_SECTIONS = 'customer_sections';
+
+    case CONTRIBUTE_SECTION = 'contribute_section';
+    case CONTRIBUTE_SECTIONS = 'contribute_sections';
+
+    
+    case HOME_ABOUT = 'home_about';
+    case HOME_ABOUTS = 'home_abouts';
 
     case NEWS_SECTION = 'news_section';
     case NEWS_SECTIONS = 'news_sections';
