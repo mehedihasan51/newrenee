@@ -1,4 +1,4 @@
-@extends('backend.app', ['title' => 'Cteate Category'])
+@extends('backend.app', ['title' => 'Update Leader'])
 
 @section('content')
 
@@ -11,12 +11,12 @@
 
             <div class="page-header">
                 <div>
-                    <h1 class="page-title">Create Leader</h1>
+                    <h1 class="page-title">Leader</h1>
                 </div>
                 <div class="ms-auto pageheader-btn">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">Leaders</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Create</li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Leader</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Update</li>
                     </ol>
                 </div>
             </div>
@@ -28,13 +28,14 @@
                         <div class="tab-pane active show" id="editProfile">
                             <div class="card">
                                 <div class="card-body border-0">
-                                    <form class="form-horizontal" method="post" action="{{ route('admin.election.store') }}" enctype="multipart/form-data">
+                                    <form class="form-horizontal" method="post" action="{{ route('admin.election.update', $election->id) }}" enctype="multipart/form-data">
                                         @csrf
+                                        @method('POST')
                                         <div class="row mb-4">
 
                                             <div class="form-group">
-                                                <label for="username" class="form-label">Name :</label>
-                                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name" id="" value="{{ old('name') }}">
+                                                <label for="username" class="form-label">Name:</label>
+                                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name" id="" value="{{ $election->name }}">
                                                 @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -42,43 +43,40 @@
 
                                             <div class="form-group">
                                                 <label for="title" class="form-label">Title:</label>
-                                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Title" id="" value="{{ old('title') }}">
+                                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Title" id="" value="{{ $election->title }}">
                                                 @error('title')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+
                                             {{-- position --}}
                                             <div class="form-group">
                                                 <label for="position" class="form-label">Position:</label>
-                                                <input type="text" class="form-control @error('position') is-invalid @enderror" name="position" placeholder="Position" id="" value="{{ old('position') }}">
+                                                <input type="text" class="form-control @error('position') is-invalid @enderror" name="position" placeholder="Position" id="" value="{{ $election->position }}">
                                                 @error('position')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                            {{-- sub title --}}
+
                                             <div class="form-group">
-                                                <label for="sub_title" class="form-label">Subtitle :</label>
-                                                <input type="text" class="form-control @error('sub_title') is-invalid @enderror" name="sub_title" placeholder="Subtitle" id="" value="{{ old('sub_title') }}">
-                                                @error('sub_title')
+                                                <label for="subtitle" class="form-label">Sub Title:</label>
+                                                <input type="text" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" placeholder="Sub Title" id="" value="{{ $election->subtitle }}">
+                                                @error('subtitle')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
 
-                                            {{-- description --}}
-
                                             <div class="form-group mb-4">
                                                 <label for="description" class="form-label">Description:</label>
-                                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Description" id="" rows="5">{{ old('description') }}</textarea>
+                                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5">{{ $election->description }}</textarea>
                                                 @error('description')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
 
-                                            {{-- sub des --}}
-
                                             <div class="form-group">
                                                 <label for="image" class="form-label">Image:</label>
-                                                <input type="file" class="dropify form-control @error('image') is-invalid @enderror" name="image" id="image">
+                                                <input type="file" data-default-file="{{ $election->image && file_exists(public_path($election->image)) ? url($election->image) : url('default/logo.svg') }}" class="dropify form-control @error('image') is-invalid @enderror" name="image" id="image">
                                                 @error('image')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -104,6 +102,5 @@
 <!-- CONTAINER CLOSED -->
 @endsection
 @push('scripts')
-
 
 @endpush

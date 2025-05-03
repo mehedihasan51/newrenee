@@ -1,283 +1,325 @@
-@php
-$url = 'admin.cms.'.$name.'.'.$section;
-@endphp
-
-@extends('backend.app', ['title' => $name . ' - ' . $section])
+@extends('backend.app', ['title' => 'Election section'])
 
 @push('styles')
-<link href="{{ asset('default/datatable.css') }}" rel="stylesheet" />
+    <link href="{{ asset('default/datatable.css') }}" rel="stylesheet" />
 @endpush
 
 
 @section('content')
-<!--app-content open-->
-<div class="app-content main-content mt-0">
-    <div class="side-app">
+    <!--app-content open-->
+    <div class="app-content main-content mt-0">
+        <div class="side-app">
 
-        <!-- CONTAINER -->
-        <div class="main-container container-fluid">
+            <!-- CONTAINER -->
+            <div class="main-container container-fluid">
 
-
-            <!-- PAGE-HEADER -->
-            <div class="page-header">
-                <div>
-                    <h1 class="page-title">CMS : {{ $name ?? '' }} Page {{ $section ?? '' }} Section.</h1>
+                <!-- PAGE-HEADER -->
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Election section</h1>
+                    </div>
+                    <div class="ms-auto pageheader-btn">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Election section</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Index</li>
+                        </ol>
+                    </div>
                 </div>
-                <div class="ms-auto pageheader-btn">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">CMS</li>
-                        <li class="breadcrumb-item">{{ $name ?? '' }}</li>
-                        <li class="breadcrumb-item">{{ $section ?? '' }}</li>
-                        <li class="breadcrumb-item active" aria-current="page">index</li>
-                    </ol>
+                <!-- PAGE-HEADER END -->
+
+                <!-- PAGE-HEADER -->
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Election</h1>
+                    </div>
+                    <div class="ms-auto pageheader-btn">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Election section</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Index</li>
+                        </ol>
+                    </div>
                 </div>
-            </div>
-            <!-- PAGE-HEADER END -->
+                <!-- PAGE-HEADER END -->
 
-            <!-- ROW-4 -->
-            <div class="row">
+                <!-- ROW-4 -->
+                <div class="row">
+                    <div class="col-12 col-sm-12">
+                        <div class="card product-sales-main">
+                            <div class="card-header border-bottom">
+                                <h3 class="card-title mb-0">List</h3>
+                                <div class="card-options ms-auto">
+                                    <a href="{{ route('admin.election.create') }}" class="btn btn-primary btn-sm">Add</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="">
+                                    <table class="table table-bordered text-nowrap border-bottom" id="datatable">
+                                        <thead>
+                                            <tr>
+                                                <th class="bg-transparent border-bottom-0 wp-15">ID</th>
+                                                <th class="bg-transparent border-bottom-0 wp-15">Title</th>
+                                                <th class="bg-transparent border-bottom-0 wp-15">Subtitle</th>
+                                                <th class="bg-transparent border-bottom-0 wp-15">Name</th>
+                                                <th class="bg-transparent border-bottom-0 wp-15">Description</th>
+                                                <th class="bg-transparent border-bottom-0 wp-15">Button Text</th>
+                                                <th class="bg-transparent border-bottom-0">Image</th>
+                                                <th class="bg-transparent border-bottom-0">Status</th>
+                                                <th class="bg-transparent border-bottom-0">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="viewModal" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">View Details</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"><i
+                                                    class="fa fa-times" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" id="viewModalContent">
+                                            <!-- Content will be loaded here -->
 
-
-                <div class="col-md-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <form method="POST" action="{{ route('admin.cms.home.customer.content') }}" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="title" class="form-label">Title:</label>
-                                            <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Enter here title" id="title" value="{{ $data->title ?? '' }}">
-                                            @error('title')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row mt-4">
-                                    <div class="col-md-12 text-center">
-                                        <button class="btn btn-primary" type="submit">Submit</button>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-7">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between border-bottom">
-                            <h3 class="card-title">All {{ $name ?? '' }} {{ $section ?? '' }} Items</h3>
-                            <!-- Add New Page Button -->
-                            <a href="{{route($url.'.create')}}" class="btn btn-primary">
-                                <i class="bx bx-plus me-sm-1 "></i> Add New Item
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="">
-                                <table class="table table-bordered text-nowrap border-bottom" id="datatable">
-                                    <thead>
-                                        <tr>
-                                            <th class="wd-15p border-bottom-0">#</th>
-                                            <th class="wd-15p border-bottom-0">Image</th>
-                                            <th class="wd-20p border-bottom-0">Status</th>
-                                            <th class="wd-15p border-bottom-0">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {{-- dynamic data --}}
-                                    </tbody>
-                                </table>
                             </div>
+
+
                         </div>
-                    </div>
+                    </div><!-- COL END -->
                 </div>
+                <!-- ROW-4 END -->
+
+
 
             </div>
-            <!-- ROW-4 END -->
-
         </div>
     </div>
-</div>
-<!-- CONTAINER CLOSED -->
+    <!-- CONTAINER CLOSED -->
 @endsection
 
 
-
 @push('scripts')
-<script>
-    $(document).ready(function() {
+    <!-- News View Modal -->
 
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            }
-        });
-        if (!$.fn.DataTable.isDataTable('#datatable')) {
-            let dTable = $('#datatable').DataTable({
-                order: [],
-                lengthMenu: [
-                    [10, 25, 50, 100, -1],
-                    [10, 25, 50, 100, "All"]
-                ],
-                processing: true,
-                responsive: true,
-                serverSide: true,
+    <script> 
+        function viewModalContent(id) {
+            fetch(`/admin/election/show/${id}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById("viewModalContent").innerHTML = `
+                <p><strong>Name:</strong> ${data.name}</p>
+                <p><strong>Subtitle:</strong> ${data.subtitle}</p>
+                <p><strong>Position:</strong> ${data.position}</p>
+                <p><strong>Title:</strong> ${data.title}</p>
+                <p><strong>Description:</strong> ${data.description}</p>
 
-                language: {
-                    processing: `<div class="text-center">
+                <p><strong>Image:</strong></p>
+                <img src="${data.image_url}" alt="Image" style="width: 50%; height: 50%;">
+
+                    <div class="mt-3 text-end">
+                        <a href="/admin/leader/edit/${data.id}" class="btn btn-primary">Edit</a>
+                       </div>
+                
+            `;
+                    const modal = new bootstrap.Modal(document.getElementById('viewModal'));
+                    modal.show();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+
+
+    <script>
+        $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                }
+            });
+            if (!$.fn.DataTable.isDataTable('#datatable')) {
+                let dTable = $('#datatable').DataTable({
+                    order: [],
+                    lengthMenu: [
+                        [10, 25, 50, 100, -1],
+                        [10, 25, 50, 100, "All"]
+                    ],
+                    processing: true,
+                    responsive: true,
+                    serverSide: true,
+
+                    language: {
+                        processing: `<div class="text-center">
                         <img src="{{ asset('default/loader.gif') }}" alt="Loader" style="width: 50px;">
                         </div>`
-                },
-
-                scroller: {
-                    loadingIndicator: false
-                },
-                pagingType: "full_numbers",
-                dom: "<'row justify-content-between table-topbar'<'col-md-4 col-sm-3'l><'col-md-5 col-sm-5 px-0'f>>tipr",
-                ajax: {
-                    url: "{{ route($url.'.index') }}",
-                    type: "GET",
-                },
-
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
                     },
 
-                    {
-                        data: 'image',
-                        name: 'image',
-                        orderable: true,
-                        searchable: true
+                    scroller: {
+                        loadingIndicator: false
                     },
-                    
-                    {
-                        data: 'status',
-                        name: 'status',
-                        orderable: false,
-                        searchable: false
+                    pagingType: "full_numbers",
+                    dom: "<'row justify-content-between table-topbar'<'col-md-4 col-sm-3'l><'col-md-5 col-sm-5 px-0'f>>tipr",
+                    ajax: {
+                        url: "{{ route('admin.election.index') }}",
+                        type: "GET",
                     },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-                ],
-            });
 
-            dTable.buttons().container().appendTo('#file_exports');
-            new DataTable('#example', {
-                responsive: true
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'title',
+                            name: 'title',
+                            orderable: true,
+                            searchable: true
+                        },
+                        {
+                            data: 'sub_title',
+                            name: 'sub_title',
+                            orderable: true,
+                            searchable: true
+                        },
+                        
+                        {
+                            data: 'name',
+                            name: 'name',
+                            orderable: true,
+                            searchable: true
+                        },
+                        {
+                            data: 'description',
+                            name: 'description',
+                            orderable: true,
+                            searchable: true
+                        },
+                        {
+                            data: 'button_text',
+                            name: 'button_text',
+                            orderable: true,
+                            searchable: true
+                        },
+                        {
+                            data: 'image',
+                            name: 'image',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'status',
+                            name: 'status',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false,
+                            className: 'dt-center text-center'
+                        },
+                    ],
+                });
+            }
+        });
+
+
+        // Status Change Confirm Alert
+        function showStatusChangeAlert(id) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You want to update the status?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    statusChange(id);
+                }
             });
         }
-    });
 
-    // Status Change Confirm Alert
-    function showStatusChangeAlert(id) {
-        event.preventDefault();
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'You want to update the status?',
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                statusChange(id);
-            }
-        });
-    }
-
-    // Status Change
-    function statusChange(id) {
-        let url = "{{ route($url.'.status', ':id') }}";
-        $.ajax({
-            type: "GET",
-            url: url.replace(':id', id),
-            success: function(resp) {
-                console.log(resp);
-                // Reloade DataTable
-                $('#datatable').DataTable().ajax.reload();
-                if (resp.success === true) {
-                    // show toast message
+        // Status Change
+        function statusChange(id) {
+            NProgress.start();
+            let url = "{{ route('admin.election.status', ':id') }}"; // Updated route
+            $.ajax({
+                type: "GET",
+                url: url.replace(':id', id),
+                success: function(resp) {
+                    NProgress.done();
                     toastr.success(resp.message);
-                } else if (resp.errors) {
-                    toastr.error(resp.errors[0]);
-                } else {
-                    toastr.error(resp.message);
+                    $('#datatable').DataTable().ajax.reload();
+                },
+                error: function(error) {
+                    NProgress.done();
+                    toastr.error(error.message);
                 }
-            },
-            error: function(error) {
-                // location.reload();
-            }
-        });
-    }
+            });
+        }
 
-    // delete Confirm
-    function showDeleteConfirm(id) {
-        event.preventDefault();
-        Swal.fire({
-            title: 'Are you sure you want to delete this record?',
-            text: 'If you delete this, it will be gone forever.',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                deleteItem(id);
-            }
-        });
-    }
+        // delete Confirm
+        function showDeleteConfirm(id) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure you want to delete this record?',
+                text: 'If you delete this, it will be gone forever.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteItem(id);
+                }
+            });
+        }
 
-    // Delete Button
-    function deleteItem(id) {
-        let url = "{{ route($url.'.destroy', ':id') }}";
-        let csrfToken = '{{ csrf_token() }}';
-        $.ajax({
-            type: "DELETE",
-            url: url.replace(':id', id),
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(resp) {
-                $('#datatable').DataTable().ajax.reload();
-                if (resp['t-success']) {
+        // Delete Button
+        function deleteItem(id) {
+            NProgress.start();
+            let url = "{{ route('admin.election.destroy', ':id') }}"; // Updated route
+            let csrfToken = '{{ csrf_token() }}';
+            $.ajax({
+                type: "DELETE",
+                url: url.replace(':id', id),
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(resp) {
+                    NProgress.done();
                     toastr.success(resp.message);
-                } else {
-                    toastr.error(resp.message);
+                    $('#datatable').DataTable().ajax.reload();
+                },
+                error: function(error) {
+                    NProgress.done();
+                    toastr.error(error.message);
                 }
-            },
-            error: function(error) {
-                toastr.error('An error occurred. Please try again.');
-            }
-        });
-    }
+            });
+        }
 
-    function editItem(id) {
-        event.preventDefault();
-        let url = "{{ route($url.'.edit', ':id') }}";
-        window.location.href = url.replace(':id', id);
-    }
-
-    function goToShow(id) {
-        event.preventDefault();
-        let url = "{{ route($url.'.show', ':id') }}";
-        window.location.href = url.replace(':id', id);
-    }
-</script>
+        //edit
+        function goToEdit(id) {
+            let url = "{{ route('admin.election.edit', ':id') }}"; // Updated route
+            window.location.href = url.replace(':id', id);
+        }
+    </script>
 @endpush

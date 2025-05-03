@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class election_day extends Model
+class election extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
@@ -14,13 +14,13 @@ class election_day extends Model
         'sub_title',
         'name',
         'description',
-        'button_test',
+        'button_text',
         'image',
         'sub_name',
         'sub_description',
         'user_id',
     ];
-    protected $table = 'election_days';
+    protected $table = 'elections';
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

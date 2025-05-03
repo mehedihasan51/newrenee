@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Web\Backend;
 
-use Exception;
-
-use App\Helpers\Helper;
-use App\Models\election_day;
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
 
-class ElectionDayController extends Controller
+use App\Helpers\Helper;
+use App\Models\SocialLink;
+use App\Http\Controllers\Controller;
+use App\Models\election;
+use Exception;
+use Illuminate\Http\JsonResponse;
+class ElectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +19,7 @@ class ElectionDayController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = election_day::all();
-            dd($data);
+            $data = election::all();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('image', function ($data) {
@@ -66,12 +65,12 @@ class ElectionDayController extends Controller
         return view("backend.layouts.election.index");
     }
 
-   /**
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        
         return view('backend.layouts.election.create');
     }
 
@@ -81,21 +80,17 @@ class ElectionDayController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-
-            'user_id' => 'required|integer',
             'title' => 'required|string|max:50',
             'sub_title' => 'required|string|max:50',
             'name' => 'required|string|max:50',
             'description' => 'required|string|max:50',
-            'button_text' => 'required|string|max:50',
+            'button_test' => 'required|string|max:50',
             'sub_name' => 'required|string|max:50',
             'sub_description' => 'required|string|max:50',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            
         ]);
     
         $validate['user_id'] = auth()->id();
-
     
         try {
             if ($request->hasFile('image')) {
@@ -106,14 +101,14 @@ class ElectionDayController extends Controller
                 );
             }
     
-            election_day::create($validate);
+            election::create($validate);
     
             return redirect()->route('admin.election.index')
-                             ->with('success', 'Election Day created successfully');
+                             ->with('success', 'Election created successfully');
     
         } catch (Exception $e) {
             dd($e->getMessage()); // Show the real error
-            return redirect()->back()->with('error', 'Failed to create Election Day.');
+            return redirect()->back()->with('error', 'Failed to create Election.');
         }
     }
     
@@ -124,17 +119,17 @@ class ElectionDayController extends Controller
 
     public function show($id)
     {
-        $election = election_day::findOrFail($id);
-        // $election->image_url = asset('/' . $election->image);
+        $election = election::findOrFail($id);
+        $election->image_url = asset('/' . $election->image);
         return response()->json($election);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(election_day $election, $id)
+    public function edit(election $election, $id)
     {
-        $election = election_day::findOrFail($id);
+        $election = election::findOrFail($id);
         return view('backend.layouts.election.edit', compact('election'));
     }
 
@@ -153,7 +148,7 @@ class ElectionDayController extends Controller
         ]);
 
         try {
-            $election = election_day::findOrFail($id);
+            $election = election::findOrFail($id);
 
             if ($request->hasFile('image')) {
                 if ($election->image && file_exists(public_path($election->image))) {
@@ -177,7 +172,7 @@ class ElectionDayController extends Controller
     public function destroy(string $id)
     {
         try {
-            $data = election_day::findOrFail($id);
+            $data = election::findOrFail($id);
             if ($data->image && file_exists(public_path($data->image))) {
                 Helper::fileDelete(public_path($data->image));
             }
@@ -196,7 +191,7 @@ class ElectionDayController extends Controller
 
     public function status(int $id): JsonResponse
     {
-        $data = election_day::findOrFail($id);
+        $data = election::findOrFail($id);
         if (!$data) {
             return response()->json([
                 'status' => 'error',

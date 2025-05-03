@@ -126,5 +126,17 @@ class User extends Authenticatable implements JWTSubject
     public function posts() {
         return $this->hasMany(Post::class);
     }
+
+    //election day model relation
+    public function electionDay()
+    {
+        return $this->hasOne(election_day::class);
+    }
+
+    public function election()
+    {
+        return $this->hasMany(election::class);
+    }
+
     
 }
