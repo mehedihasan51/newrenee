@@ -128,14 +128,10 @@ class User extends Authenticatable implements JWTSubject
     }
 
     //election day model relation
-    public function electionDay()
-    {
-        return $this->hasOne(election_day::class);
-    }
 
     public function election()
     {
-        return $this->hasMany(election::class);
+        return $this->hasMany(Election::class);
     }
 
     

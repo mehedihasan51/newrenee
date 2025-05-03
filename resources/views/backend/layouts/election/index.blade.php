@@ -118,17 +118,14 @@
                 })
                 .then(data => {
                     document.getElementById("viewModalContent").innerHTML = `
-                <p><strong>Name:</strong> ${data.name}</p>
-                <p><strong>Subtitle:</strong> ${data.subtitle}</p>
-                <p><strong>Position:</strong> ${data.position}</p>
-                <p><strong>Title:</strong> ${data.title}</p>
-                <p><strong>Description:</strong> ${data.description}</p>
+                <p><strong>Subtitle:</strong> ${data.sub_name}</p>
+                <p><strong>Position:</strong> ${data.sub_description}</p>
 
                 <p><strong>Image:</strong></p>
                 <img src="${data.image_url}" alt="Image" style="width: 50%; height: 50%;">
 
                     <div class="mt-3 text-end">
-                        <a href="/admin/leader/edit/${data.id}" class="btn btn-primary">Edit</a>
+                        <a href="/admin/election/edit/${data.id}" class="btn btn-primary">Edit</a>
                        </div>
                 
             `;

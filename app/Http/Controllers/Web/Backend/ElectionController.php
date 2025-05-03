@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Web\Backend;
 
-use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
-
 use App\Helpers\Helper;
 use App\Models\SocialLink;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\election;
+use App\Models\News;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Yajra\DataTables\Facades\DataTables;
+
+
 class ElectionController extends Controller
 {
     /**
@@ -19,7 +21,7 @@ class ElectionController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = election::all();
+            $data = Election::all();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('image', function ($data) {
@@ -54,8 +56,8 @@ class ElectionController extends Controller
                                     <i class="fe fe-trash"></i>
                                 </a>
                                 
-                                <a href="#" type="button" onclick="event.preventDefault(); viewModalContent(' . $data->id . ')" class="btn btn-green fs-14 text-white delete-icn" title="View">
-                                    <i class="fe fe-eye"></i>
+                                <a href="#" type="button" onclick="event.preventDefault(); viewModalContent(' . $data->id . ')" class="btn btn-green fs-14 text-white delete-icn" title="view">
+                                     <i class="fe fe-eye"></i>
                                 </a>
                             </div>';
                 })
@@ -64,7 +66,6 @@ class ElectionController extends Controller
         }
         return view("backend.layouts.election.index");
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -80,38 +81,38 @@ class ElectionController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'title' => 'required|string|max:50',
-            'sub_title' => 'required|string|max:50',
-            'name' => 'required|string|max:50',
-            'description' => 'required|string|max:50',
-            'button_test' => 'required|string|max:50',
-            'sub_name' => 'required|string|max:50',
-            'sub_description' => 'required|string|max:50',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'user_id' => 'nullable|integer',
+            'title' => 'nullable|string|max:50',
+            'sub_title' => 'nullable|string|max:50',
+            'name' => 'nullable|string|max:50',
+            'description' => 'nullable|string|max:50',
+            'button_text' => 'nullable|string|max:50',
+            'sub_name' => 'nullable|string|max:50',
+            'sub_description' => 'nullable|string|max:50',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+
         ]);
-    
+
+
         $validate['user_id'] = auth()->id();
-    
+
         try {
+
             if ($request->hasFile('image')) {
-                $validate['image'] = Helper::fileUpload(
-                    $request->file('image'),
-                    'image',
-                    time() . '_' . getFileName($request->file('image'))
-                );
+                $validate['image'] = Helper::fileUpload($request->file('image'), 'image', time() . '_' . getFileName($request->file('image')));
+
             }
-    
-            election::create($validate);
-    
-            return redirect()->route('admin.election.index')
-                             ->with('success', 'Election created successfully');
-    
+
+            Election::create($validate);
+
+            session()->put('t-success', 'Election created successfully');
         } catch (Exception $e) {
-            dd($e->getMessage()); // Show the real error
-            return redirect()->back()->with('error', 'Failed to create Election.');
+            session()->put('t-error', $e->getMessage());
         }
+
+        return redirect()->route('admin.election.index')->with('success', 'Election created successfully');
+        // return redirect()->back()->with('success', 'Election created successfully');
     }
-    
 
     /**
      * Display the specified resource.
@@ -119,7 +120,7 @@ class ElectionController extends Controller
 
     public function show($id)
     {
-        $election = election::findOrFail($id);
+        $election = Election::findOrFail($id);
         $election->image_url = asset('/' . $election->image);
         return response()->json($election);
     }
@@ -127,9 +128,9 @@ class ElectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(election $election, $id)
+    public function edit(Election $election, $id)
     {
-        $election = election::findOrFail($id);
+        $election = Election::findOrFail($id);
         return view('backend.layouts.election.edit', compact('election'));
     }
 
@@ -139,26 +140,26 @@ class ElectionController extends Controller
     public function update(Request $request, $id)
     {
         $validate = $request->validate([
-            'name' => 'required|string|max:50',
-            'title' => 'required|string|max:50',
-            'position' => 'required|string|max:50',
+            'name' => 'nullable|string|max:50',
+            'title' => 'nullable|string|max:50',
+            'news_type' => 'nullable|in:normal,live',
             'description' => 'nullable|string|max:50',
             'sub_title' => 'nullable|string|max:50',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         try {
-            $election = election::findOrFail($id);
+            $news = Election::findOrFail($id);
 
             if ($request->hasFile('image')) {
-                if ($election->image && file_exists(public_path($election->image))) {
-                    Helper::fileDelete(public_path($election->image));
+                if ($news->image && file_exists(public_path($news->image))) {
+                    Helper::fileDelete(public_path($news->image));
                 }
                 $validate['image'] = Helper::fileUpload($request->file('image'), 'image', time() . '_' . getFileName($request->file('image')));
             }
 
-            $election->update($validate);
-            session()->put('t-success', 'Election updated successfully');
+            $news->update($validate);
+            session()->put('t-success', 'News updated successfully');
         } catch (Exception $e) {
             session()->put('t-error', $e->getMessage());
         }
@@ -172,26 +173,26 @@ class ElectionController extends Controller
     public function destroy(string $id)
     {
         try {
-            $data = election::findOrFail($id);
+            $data = Election::findOrFail($id);
             if ($data->image && file_exists(public_path($data->image))) {
                 Helper::fileDelete(public_path($data->image));
             }
             $data->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Election deleted successfully!'
+                'message' => 'Your action was successful!'
             ]);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Error deleting election: ' . $e->getMessage()
+                'message' => 'Your action was successful!'
             ]);
         }
     }
 
     public function status(int $id): JsonResponse
     {
-        $data = election::findOrFail($id);
+        $data = Election::findOrFail($id);
         if (!$data) {
             return response()->json([
                 'status' => 'error',

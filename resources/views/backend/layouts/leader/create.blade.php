@@ -28,7 +28,7 @@
                         <div class="tab-pane active show" id="editProfile">
                             <div class="card">
                                 <div class="card-body border-0">
-                                    <form class="form-horizontal" method="post" action="{{ route('admin.election.store') }}" enctype="multipart/form-data">
+                                    <form class="form-horizontal" method="post" action="{{ route('admin.leader.store') }}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row mb-4">
 
@@ -57,9 +57,9 @@
                                             </div>
                                             {{-- sub title --}}
                                             <div class="form-group">
-                                                <label for="sub_title" class="form-label">Subtitle :</label>
-                                                <input type="text" class="form-control @error('sub_title') is-invalid @enderror" name="sub_title" placeholder="Subtitle" id="" value="{{ old('sub_title') }}">
-                                                @error('sub_title')
+                                                <label for="subtitle" class="form-label">Subtitle :</label>
+                                                <input type="text" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" placeholder="Subtitle" id="" value="{{ old('subtitle') }}">
+                                                @error('subtitle')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>

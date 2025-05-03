@@ -80,12 +80,12 @@ class MeetLeaderController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'name' => 'required|string|max:50',
-            'title' => 'required|string|max:50',
-            'position' => 'required|string|max:50',
-            'description' => 'required|string|max:50',
-            'subtitle' => 'required|string|max:50',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'name' => 'nullable|string|max:50',
+            'title' => 'nullable|string|max:50',
+            'position' => 'nullable|string|max:50',
+            'description' => 'nullable|string|max:50',
+            'subtitle' => 'nullable|string|max:50',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
 
         ]);
 
