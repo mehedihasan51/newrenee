@@ -33,14 +33,14 @@
                                         <div class="row mb-4">
 
                                             <div class="form-group">
-                                                <label for="username" class="form-label">Name:</label>
+                                                <label for="username" class="form-label">Name :</label>
                                                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name" id="" value="{{ old('name') }}">
                                                 @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="username" class="form-label">Sub Title:</label>
+                                                <label for="username" class="form-label">Sub Title :</label>
                                                 <input type="text" class="form-control @error('sub_title') is-invalid @enderror" name="sub_title" placeholder="Sub Title" id="" value="{{ old('sub_title') }}">
                                                 @error('sub_title')
                                                 <span class="text-danger">{{ $message }}</span>
