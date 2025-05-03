@@ -119,7 +119,7 @@
                 .then(data => {
                     document.getElementById("viewModalContent").innerHTML = `
                 <p><strong>Subtitle:</strong> ${data.sub_name}</p>
-                <p><strong>Position:</strong> ${data.sub_description}</p>
+                <p><strong>Sub Description:</strong> ${data.sub_description}</p>
 
                 <p><strong>Image:</strong></p>
                 <img src="${data.image_url}" alt="Image" style="width: 50%; height: 50%;">
