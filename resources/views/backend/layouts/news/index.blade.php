@@ -1,7 +1,7 @@
 @extends('backend.app', ['title' => 'News Category'])
 
 @push('styles')
-<link href="{{ asset('default/datatable.css') }}" rel="stylesheet" />  
+<link href="{{ asset('default/datatable.css') }}" rel="stylesheet" />
 @endpush
 
 
@@ -16,11 +16,11 @@
             <!-- PAGE-HEADER -->
             <div class="page-header">
                 <div>
-                    <h1 class="page-title">News Category</h1>
+                    <h1 class="page-title">News Section</h1>
                 </div>
                 <div class="ms-auto pageheader-btn">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">News Category</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">News Section</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Index</li>
                     </ol>
                 </div>
@@ -30,11 +30,11 @@
             <!-- PAGE-HEADER -->
             <div class="page-header">
                 <div>
-                    <h1 class="page-title">Category</h1>
+                    <h1 class="page-title">News</h1>
                 </div>
                 <div class="ms-auto pageheader-btn">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">Category</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">News</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Index</li>
                     </ol>
                 </div>
@@ -69,11 +69,29 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="modal fade" id="viewModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">View Details</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="viewModalContent">
+                                        <!-- Content will be loaded here -->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div><!-- COL END -->
             </div>
             <!-- ROW-4 END -->
+
+
 
         </div>
     </div>
@@ -84,6 +102,41 @@
 
 
 @push('scripts')
+
+
+
+<!-- News View Modal -->
+
+<script>
+function viewModalContent(id) {
+    fetch(`/admin/news/show/${id}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById("viewModalContent").innerHTML = `
+                <p><strong>Name:</strong> ${data.name}</p>
+                <p><strong>Subtitle:</strong> ${data.sub_title}</p>
+                <p><strong>Title:</strong> ${data.sub_title}</p>
+                <p><strong>description:</strong> ${data.description}</p>
+                <p><strong>News Type:</strong> ${data.news_type}</p>
+                <p><strong>Image:</strong></p>
+                <img src="${data.image_url}" alt="Image" style="width: 50%; height: 50%;">
+                
+            `;
+            const modal = new bootstrap.Modal(document.getElementById('viewModal'));
+            modal.show();
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+</script>
+
+
+
 <script>
     $(document).ready(function() {
 
@@ -160,6 +213,7 @@
             });
         }
     });
+
 
     // Status Change Confirm Alert
     function showStatusChangeAlert(id) {

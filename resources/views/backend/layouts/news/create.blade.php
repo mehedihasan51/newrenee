@@ -11,11 +11,11 @@
 
             <div class="page-header">
                 <div>
-                    <h1 class="page-title">Category</h1>
+                    <h1 class="page-title">News</h1>
                 </div>
                 <div class="ms-auto pageheader-btn">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">Category</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">News</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Create</li>
                     </ol>
                 </div>
@@ -39,10 +39,40 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="title" class="form-label">Title:</label>
+                                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Title" id="" value="{{ old('title') }}">
+                                                @error('title')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group mt-3">
+                                                <label for="news_type" class="form-label">News Type:</label>
+                                                <select name="news_type" class="form-control @error('news_type') is-invalid @enderror" id="news_type">
+                                                    <option value="normal" {{ old('news_type', 'normal') == 'normal' ? 'selected' : '' }}>Normal</option>
+                                                    <option value="live" {{ old('news_type') == 'live' ? 'selected' : '' }}>Live</option>
+                                                </select>
+                                                @error('news_type')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+
+
                                             <div class="form-group">
                                                 <label for="username" class="form-label">Sub Title :</label>
                                                 <input type="text" class="form-control @error('sub_title') is-invalid @enderror" name="sub_title" placeholder="Sub Title" id="" value="{{ old('sub_title') }}">
                                                 @error('sub_title')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group mb-4">
+                                                <label for="description" class="form-label">Description:</label>
+                                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Description" id="" rows="5">{{ old('description') }}</textarea>
+                                                @error('description')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -75,5 +105,6 @@
 <!-- CONTAINER CLOSED -->
 @endsection
 @push('scripts')
-    
+
+
 @endpush

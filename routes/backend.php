@@ -92,6 +92,7 @@ Route::controller(NewsController::class)->prefix('news')->name('news.')->group(f
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
+    Route::get('/show/{id}', 'show')->name('show');
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::post('/update/{id}', 'update')->name('update');
     Route::delete('/delete/{id}', 'destroy')->name('destroy');
@@ -143,18 +144,19 @@ Route::prefix('cms')->name('cms.')->group(function () {
     });
 
     //news section
-    Route::prefix('news/section')->name('news.section.')->controller(NewsController::class)->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
-        Route::post('/', 'store')->name('store');
-        Route::get('/{id}', 'show')->name('show');
-        Route::get('/{id}/edit', 'edit')->name('edit');
-        Route::patch('/{id}', 'update')->name('update');
-        Route::delete('/{id}', 'destroy')->name('destroy');
-        Route::get('/{id}/status', 'status')->name('status');
+    // Route::prefix('news/section')->name('news.section.')->controller(NewsController::class)->group(function () {
+    //     Route::get('/', 'index')->name('index');
+    //     Route::get('/create', 'create')->name('create');
+    //     Route::post('/', 'store')->name('store');
+    //     Route::get('/{id}', 'show')->name('show');
+    //     Route::get('/{id}/edit', 'edit')->name('edit');
+    //     Route::patch('/{id}', 'update')->name('update');
+    //     Route::delete('/{id}', 'destroy')->name('destroy');
+    //     Route::get('/{id}/status', 'status')->name('status');
 
-        Route::put('/content', 'content')->name('content');
-    });
+    //     Route::put('/content', 'content')->name('content');
+    // });
+
 
     //faq section
     Route::prefix('faq/section')->name('faq.section.')->controller(FaqController::class)->group(function () {
