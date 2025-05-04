@@ -32,6 +32,8 @@ use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\AboutSectionController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeCustomerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeContributeController;
+use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoBannerController;
+
 // use App\Http\Controllers\Web\Backend\CMS\Web\News\NewsController;
 
 Route::get("dashboard", [DashboardController::class, 'index'])->name('dashboard');
@@ -203,19 +205,19 @@ Route::prefix('cms')->name('cms.')->group(function () {
         Route::put('/content', 'content')->name('content');
     });
 
-    //news section
-    // Route::prefix('news/section')->name('news.section.')->controller(NewsController::class)->group(function () {
-    //     Route::get('/', 'index')->name('index');
-    //     Route::get('/create', 'create')->name('create');
-    //     Route::post('/', 'store')->name('store');
-    //     Route::get('/{id}', 'show')->name('show');
-    //     Route::get('/{id}/edit', 'edit')->name('edit');
-    //     Route::patch('/{id}', 'update')->name('update');
-    //     Route::delete('/{id}', 'destroy')->name('destroy');
-    //     Route::get('/{id}/status', 'status')->name('status');
+    // WHO Section
+    Route::prefix('who/banner')->name('who.banner.')->controller(WhoBannerController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::get('/{id}/status', 'status')->name('status');
 
-    //     Route::put('/content', 'content')->name('content');
-    // });
+        Route::put('/content', 'content')->name('content');
+    });
 
 
     //faq section
@@ -231,7 +233,6 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
         Route::put('/content', 'content')->name('content');
     });
-    
 });
 
 /*
