@@ -137,7 +137,7 @@ class MeetLeaderController extends Controller
             'title' => 'required|string|max:50',
             'position' => 'required|string|max:50',
             'description' => 'nullable|string|max:50',
-            'sub_title' => 'nullable|string|max:50',
+            'subtitle' => 'nullable|string|max:50',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 

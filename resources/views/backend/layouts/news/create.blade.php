@@ -31,7 +31,10 @@
                                     <form class="form-horizontal" method="post" action="{{ route('admin.news.store') }}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row mb-4">
-
+                                            
+                                            {{-- title --}}
+                                            <div class="col-lg-6">
+                                               
                                             <div class="form-group">
                                                 <label for="username" class="form-label">Name :</label>
                                                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name" id="" value="{{ old('name') }}">
@@ -39,7 +42,9 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                            </div>
 
+                                            <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="title" class="form-label">Title:</label>
                                                 <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Title" id="" value="{{ old('title') }}">
@@ -47,26 +52,32 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                            </div>
 
+
+                                            <div class="col-lg-6">
                                             <div class="form-group mt-3">
                                                 <label for="news_type" class="form-label">News Type:</label>
                                                 <select name="news_type" class="form-control @error('news_type') is-invalid @enderror" id="news_type">
-                                                    <option value="normal" {{ old('news_type', 'normal') == 'normal' ? 'selected' : '' }}>Normal</option>
+                                                    <option value="">--Select News Type--</option>
+                                                    <option value="normal" {{ old('news_type') == 'normal' ? 'selected' : '' }}>Normal</option>
                                                     <option value="live" {{ old('news_type') == 'live' ? 'selected' : '' }}>Live</option>
                                                 </select>
                                                 @error('news_type')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                            </div>
 
 
-
+                                            <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="username" class="form-label">Sub Title :</label>
                                                 <input type="text" class="form-control @error('sub_title') is-invalid @enderror" name="sub_title" placeholder="Sub Title" id="" value="{{ old('sub_title') }}">
                                                 @error('sub_title')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
+                                            </div>
                                             </div>
 
                                             <div class="form-group mb-4">

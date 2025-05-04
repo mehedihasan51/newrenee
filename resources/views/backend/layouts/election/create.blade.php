@@ -32,6 +32,8 @@
                                         @csrf
                                         <div class="row mb-4">
                                             {{-- title --}}
+                                            <div class="col-lg-6">
+                                               
                                             <div class="form-group">
                                                 <label for="title" class="form-label">Title:</label>
                                                 <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Title" id="" value="{{ old('title') }}">
@@ -39,7 +41,9 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-
+                                            </div>
+                                            
+                                            <div class="col-lg-6">
                                             {{-- sub_title --}}
                                             <div class="form-group">
                                                 <label for="sub_title" class="form-label">Subtitle :</label>
@@ -48,7 +52,9 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                            </div>
 
+                                            <div class="col-lg-6">
                                             {{-- name --}}
                                             <div class="form-group">
                                                 <label for="name" class="form-label">Name :</label>
@@ -57,6 +63,19 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="sub_name" class="form-label">Sub Name:</label>
+                                                <input type="text" class="form-control @error('sub_name') is-invalid @enderror" name="sub_name" placeholder="Sub Name" id="" value="{{ old('sub_name') }}">
+                                                @error('sub_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            </div>
+
+                                            {{-- position --}}
 
 
                                             <div class="form-group mb-4">
@@ -78,13 +97,6 @@
                                                 @enderror
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="sub_name" class="form-label">Sub Name:</label>
-                                                <input type="text" class="form-control @error('sub_name') is-invalid @enderror" name="sub_name" placeholder="Sub Name" id="" value="{{ old('sub_name') }}">
-                                                @error('sub_name')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
                                             {{-- sub description --}}
                                             <div class="form-group">
                                                 <label for="sub_description" class="form-label">Sub Description:</label>

@@ -32,6 +32,8 @@
                                         @csrf
                                         <div class="row mb-4">
 
+                                            <div class="col-lg-6">
+                                                
                                             <div class="form-group">
                                                 <label for="username" class="form-label">Name :</label>
                                                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name" id="" value="{{ old('name') }}">
@@ -39,7 +41,10 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                            </div>
 
+                                            <div class="col-lg-6">
+                                                
                                             <div class="form-group">
                                                 <label for="title" class="form-label">Title:</label>
                                                 <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Title" id="" value="{{ old('title') }}">
@@ -47,7 +52,9 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                            </div>
                                             {{-- position --}}
+                                            <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="position" class="form-label">Position:</label>
                                                 <input type="text" class="form-control @error('position') is-invalid @enderror" name="position" placeholder="Position" id="" value="{{ old('position') }}">
@@ -55,7 +62,10 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
-                                            {{-- sub title --}}
+                                            </div>
+
+                                           
+                                            <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="subtitle" class="form-label">Subtitle :</label>
                                                 <input type="text" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" placeholder="Subtitle" id="" value="{{ old('subtitle') }}">
@@ -63,6 +73,8 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+                                            </div>
+
 
                                             {{-- description --}}
 
