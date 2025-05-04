@@ -61,7 +61,6 @@
                                                 <th class="bg-transparent border-bottom-0 wp-15">Subtitle</th>
                                                 <th class="bg-transparent border-bottom-0 wp-15">Name</th>
                                                 <th class="bg-transparent border-bottom-0 wp-15">Sub Name</th>
-                                                <th class="bg-transparent border-bottom-0 wp-15">Description</th>
                                                 <th class="bg-transparent border-bottom-0">Image</th>
                                                 <th class="bg-transparent border-bottom-0">Status</th>
                                                 <th class="bg-transparent border-bottom-0">Action</th>
@@ -201,12 +200,6 @@
                         {
                             data: 'sub_name',
                             name: 'sub_name',
-                            orderable: true,
-                            searchable: true
-                        },
-                        {
-                            data: 'description',
-                            name: 'description',
                             orderable: true,
                             searchable: true
                         },

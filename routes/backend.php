@@ -28,6 +28,7 @@ use App\Http\Controllers\Web\Backend\Access\PermissionController;
 use App\Http\Controllers\Web\Backend\Settings\FirebaseController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoCmcController;
 use App\Http\Controllers\Web\Backend\Settings\GoogleMapController;
+use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoValueController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoWeareController;
 use App\Http\Controllers\Web\Backend\Settings\MailSettingController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoBannerController;
@@ -250,6 +251,20 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
     // Who CMC Section
     Route::prefix('who/cmc')->name('who.cmc.')->controller(WhoCmcController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::get('/{id}/status', 'status')->name('status');
+
+        Route::put('/content', 'content')->name('content');
+    });
+
+    // Who Value Section
+    Route::prefix('who/value')->name('who.value.')->controller(WhoValueController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');

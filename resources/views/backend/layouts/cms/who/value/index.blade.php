@@ -41,7 +41,7 @@ $url = 'admin.cms.'.$name.'.'.$section;
                 <div class="col-md-5">
                     <div class="card">
                         <div class="card-body">
-                            <form method="POST" action="{{ route('admin.cms.who.cmc.content') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.cms.who.value.content') }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -103,7 +103,6 @@ $url = 'admin.cms.'.$name.'.'.$section;
                                             <th class="wd-15p border-bottom-0">#</th>
                                             <th class="wd-15p border-bottom-0">Title</th>
                                             <th class="wd-15p border-bottom-0">Sub Title</th>
-                                            <th class="wd-15p border-bottom-0">Icon</th>
                                             <th class="wd-20p border-bottom-0">Status</th>
                                             <th class="wd-15p border-bottom-0">Action</th>
                                         </tr>
@@ -182,14 +181,6 @@ $url = 'admin.cms.'.$name.'.'.$section;
                         orderable: true,
                         searchable: true
                     },
-
-                    {
-                        data: 'image',
-                        name: 'image',
-                        orderable: true,
-                        searchable: true
-                    },
-                    
                     {
                         data: 'status',
                         name: 'status',

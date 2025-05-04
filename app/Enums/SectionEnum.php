@@ -35,6 +35,9 @@ enum SectionEnum: string
     case WHO_CMC_SECTION = 'who_cmc_section';
     case WHO_CMC_SECTIONS = 'who_cmc_sections';
 
+    case WHO_VALUE_SECTION = 'who_value_section';
+    case WHO_VALUE_SECTIONS = 'who_value_sections';
+
 
     case NEWS_SECTION = 'news_section';
     case NEWS_SECTIONS = 'news_sections';

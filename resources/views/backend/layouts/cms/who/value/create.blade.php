@@ -60,17 +60,6 @@ $url = 'admin.cms.'.$name.'.'.$section;
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="image" class="form-label">Icon:</label>
-                                                    <input type="file" class="dropify @error('image') is-invalid @enderror" name="image"
-                                                        id="image"
-                                                        data-default-file="">
-                                                    @error('image')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div class="row mt-4">
