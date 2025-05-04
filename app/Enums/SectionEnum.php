@@ -32,6 +32,9 @@ enum SectionEnum: string
     case WHO_WE_ARE_SECTION = 'who_we_are_section';
     case WHO_WE_ARE_SECTIONS = 'who_we_are_sections';
 
+    case WHO_CMC_SECTION = 'who_cmc_section';
+    case WHO_CMC_SECTIONS = 'who_cmc_sections';
+
 
     case NEWS_SECTION = 'news_section';
     case NEWS_SECTIONS = 'news_sections';

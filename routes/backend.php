@@ -25,15 +25,16 @@ use App\Http\Controllers\Web\Backend\Settings\ProfileController;
 use App\Http\Controllers\Web\Backend\Settings\SettingController;
 use App\Http\Controllers\Web\Backend\Access\PermissionController;
 use App\Http\Controllers\Web\Backend\Settings\FirebaseController;
+use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoCmcController;
 use App\Http\Controllers\Web\Backend\Settings\GoogleMapController;
+use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoWeareController;
 use App\Http\Controllers\Web\Backend\Settings\MailSettingController;
+use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeAboutController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\AboutSectionController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeCustomerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeContributeController;
-use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoBannerController;
-use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoWeareController;
 
 // use App\Http\Controllers\Web\Backend\CMS\Web\News\NewsController;
 
@@ -222,6 +223,20 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
     // Who We Are Section
     Route::prefix('who/we/are')->name('who.weare.')->controller(WhoWeareController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::get('/{id}/status', 'status')->name('status');
+
+        Route::put('/content', 'content')->name('content');
+    });
+
+    // Who CMC Section
+    Route::prefix('who/cmc')->name('who.cmc.')->controller(WhoCmcController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');

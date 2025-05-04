@@ -164,6 +164,9 @@
                     <ul class="slide-menu">
                         <li><a href="{{ route('admin.cms.who.weare.index') }}" class="slide-item">Who We Are Section</a></li>
                     </ul>
+                    <ul class="slide-menu">
+                        <li><a href="{{ route('admin.cms.who.cmc.index') }}" class="slide-item">Who cmc Section</a></li>
+                    </ul>
 
                 </li>
 
