@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\RegisterController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ChatController;
+use App\Http\Controllers\Api\Auth\UserController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
-use App\Http\Controllers\Api\Auth\ResetPasswordController;
-use App\Http\Controllers\Api\Auth\UserController;
-use App\Http\Controllers\Api\Auth\SocialLoginController;
-use App\Http\Controllers\Api\ChatController;
-use App\Http\Controllers\Api\FirebaseTokenController;
-use App\Http\Controllers\Api\Frontend\categoryController;
-use App\Http\Controllers\Api\Frontend\HomeController;
-use App\Http\Controllers\Api\Frontend\PostController;
-use App\Http\Controllers\Api\Frontend\SubcategoryController;
 use App\Http\Controllers\Api\NotificationController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\FirebaseTokenController;
+use App\Http\Controllers\Api\Frontend\HomeController;
+use App\Http\Controllers\Api\Frontend\NewsController;
+use App\Http\Controllers\Api\Frontend\PostController;
+use App\Http\Controllers\Api\Auth\SocialLoginController;
+use App\Http\Controllers\Api\Frontend\categoryController;
+use App\Http\Controllers\Api\Auth\ResetPasswordController;
+use App\Http\Controllers\Api\Frontend\SubcategoryController;
 
 
 //page
@@ -54,7 +55,16 @@ Route::group(['middleware' => 'auth:api | otp'], function ($router) {
     Route::post('/update-profile', [UserController::class, 'updateProfile']);
     Route::post('/update-avatar', [UserController::class, 'updateAvatar']);
     Route::delete('/delete-profile', [UserController::class, 'deleteProfile']);
+
+
 });
+
+    // update news
+    Route::get('/news', [NewsController::class, 'index']);
+    Route::post('/news', [NewsController::class, 'store']);
+    Route::get('/news/{id}', [NewsController::class, 'show']);
+    Route::put('/news/{id}', [NewsController::class, 'update']);
+    Route::delete('/news/{id}', [NewsController::class, 'destroy']);
 
 /*
 # Firebase Notification Route
