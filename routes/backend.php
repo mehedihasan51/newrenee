@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\Backend\NewsController;
 use App\Http\Controllers\Web\Backend\PageController;
 use App\Http\Controllers\Web\Backend\PostController;
 use App\Http\Controllers\Web\Backend\ContactController;
+use App\Http\Controllers\Web\Backend\MissionController;
 use App\Http\Controllers\Web\Backend\CategoryController;
 use App\Http\Controllers\Web\Backend\ElectionController;
 use App\Http\Controllers\Web\Backend\DashboardController;
@@ -111,6 +112,18 @@ Route::controller(NewsController::class)->prefix('news')->name('news.')->group(f
 
 // meet_leader
 Route::controller(MeetLeaderController::class)->prefix('leader')->name('leader.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/show/{id}', 'show')->name('show');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::post('/update/{id}', 'update')->name('update');
+    Route::delete('/delete/{id}', 'destroy')->name('destroy');
+    Route::get('/status/{id}', 'status')->name('status');
+});
+
+// mission
+Route::controller(MissionController::class)->prefix('mission')->name('mission.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
