@@ -33,6 +33,7 @@ use App\Http\Controllers\Web\Backend\CMS\Web\Home\AboutSectionController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeCustomerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeContributeController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoBannerController;
+use App\Http\Controllers\Web\Backend\CMS\Web\Who\WhoWeareController;
 
 // use App\Http\Controllers\Web\Backend\CMS\Web\News\NewsController;
 
@@ -207,6 +208,20 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
     // WHO Section
     Route::prefix('who/banner')->name('who.banner.')->controller(WhoBannerController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::get('/{id}/status', 'status')->name('status');
+
+        Route::put('/content', 'content')->name('content');
+    });
+
+    // Who We Are Section
+    Route::prefix('who/we/are')->name('who.weare.')->controller(WhoWeareController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
