@@ -203,6 +203,9 @@
                     <ul class="slide-menu">
                         <li><a href="{{ route('admin.executive.index') }}" class="slide-item">Executive Section</a></li>
                     </ul>
+                    <ul class="slide-menu">
+                        <li><a href="{{ route('admin.member.index') }}" class="slide-item">Member Section</a></li>
+                    </ul>
                 </li>
 
                 <li class="slide">

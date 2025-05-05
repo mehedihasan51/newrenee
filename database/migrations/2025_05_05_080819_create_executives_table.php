@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('position');
             $table->string('image');
             $table->string('title');
-            $table->string('button_text')->default('Learn More')->nullable();
+            $table->string('button_text')->default('View All');
             $table->string('description');
            
             $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->timestamps();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -32,6 +32,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('executives');
-        
     }
 };

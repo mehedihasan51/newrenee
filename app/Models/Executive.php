@@ -15,6 +15,7 @@ class Executive extends Model
         'position',
         'image',
         'title',
+        'button_text',
         'description',
     ];
 

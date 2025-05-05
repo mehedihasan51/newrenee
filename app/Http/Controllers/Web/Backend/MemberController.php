@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Web\Backend;
 
-
+use App\Models\meet_leader;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 use App\Helpers\Helper;
 use App\Models\SocialLink;
 use App\Http\Controllers\Controller;
-use App\Models\Executive;
+use App\Models\Member;
 use Exception;
 use Illuminate\Http\JsonResponse;
-class ExecutiveController extends Controller
+class MemberController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class ExecutiveController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Executive::all();
+            $data = Member::all();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('image', function ($data) {
@@ -54,63 +54,55 @@ class ExecutiveController extends Controller
                                 <a href="#" type="button" onclick="event.preventDefault(); showDeleteConfirm(' . $data->id . ')" class="btn btn-danger fs-14 text-white delete-icn" title="Delete">
                                     <i class="fe fe-trash"></i>
                                 </a>
-                                
-                                <a href="#" type="button" onclick="event.preventDefault(); viewModalContent(' . $data->id . ')" class="btn btn-green fs-14 text-white delete-icn" title="View">
-                                    <i class="fe fe-eye"></i>
-                                </a>
                             </div>';
                 })
                 ->rawColumns(['image', 'status', 'action'])
                 ->make();
         }
-        return view("backend.layouts.executive.index");
+        return view("backend.layouts.member.index");
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('backend.layouts.executive.create');
+        return view('backend.layouts.member.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-
-
     public function store(Request $request)
-{
-    $validate = $request->validate([
-        'name' => 'nullable|string|max:50',
-        'title' => 'nullable|string|max:50',
-        'position' => 'nullable|string|max:50',
-        'button_text' => 'nullable|string|max:50',
-        'description' => 'nullable|string|max:50',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-    ]);
+    {
+        $validate = $request->validate([
+            'title' => 'nullable|string|max:50',
+            'sub_title' => 'nullable|string|max:50',
+            'description' => 'nullable|string|max:50',
+            'representative_button' => 'nullable|string|max:50',
+            'senator_button' => 'nullable|string|max:50',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
 
-    try {
-        if ($request->hasFile('image')) {
-            $validate['image'] = Helper::fileUpload(
-                $request->file('image'),
-                'image',
-                time() . '_' . getFileName($request->file('image'))
-            );
+        ]);
+
+        try {
+
+            if ($request->hasFile('image')) {
+                $validate['image'] = Helper::fileUpload($request->file('image'), 'image', time() . '_' . getFileName($request->file('image')));
+
+            }
+
+            Member::create($validate);
+
+            session()->put('t-success', 'Member created successfully');
+        } catch (Exception $e) {
+            session()->put('t-error', $e->getMessage());
         }
 
-        // 🔧 Set fallback for button_text if empty or missing
-        $validate['button_text'] = $validate['button_text'] ?? 'Learn More';
-
-        Executive::create($validate);
-
-        session()->put('t-success', 'Executive created successfully');
-    } catch (Exception $e) {
-        session()->put('t-error', $e->getMessage());
+        return redirect()->route('admin.member.index')->with('success', 'Member created successfully');
+        // return redirect()->back()->with('success', 'Leader created successfully');
     }
-
-    return redirect()->route('admin.executive.index')->with('success', 'Executive created successfully');
-}
 
     /**
      * Display the specified resource.
@@ -118,18 +110,18 @@ class ExecutiveController extends Controller
 
     public function show($id)
     {
-        $executive = Executive::findOrFail($id);
-        $executive->image_url = asset('/' . $executive->image);
-        return response()->json($executive);
+        $member = Member::findOrFail($id);
+        $member->image_url = asset('/' . $member->image);
+        return response()->json($member);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Executive $leader, $id)
+    public function edit(Member $member, $id)
     {
-        $executive = Executive::findOrFail($id);
-        return view('backend.layouts.executive.edit', compact('executive'));
+        $member = Member::findOrFail($id);
+        return view('backend.layouts.member.edit', compact('member'));
     }
 
     /**
@@ -138,31 +130,31 @@ class ExecutiveController extends Controller
     public function update(Request $request, $id)
     {
         $validate = $request->validate([
-            'name' => 'required|string|max:50',
-            'title' => 'required|string|max:50',
-            'position' => 'required|string|max:50',
-            'button_text' => 'required|string|max:50',
+            'title' => 'nullable|string|max:50',
+            'sub_title' => 'nullable|string|max:50',
             'description' => 'nullable|string|max:50',
+            'representative_button' => 'nullable|string|max:50',
+            'senator_button' => 'nullable|string|max:50',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         try {
-            $executive = Executive::findOrFail($id);
+            $member = Member::findOrFail($id);
 
             if ($request->hasFile('image')) {
-                if ($executive->image && file_exists(public_path($executive->image))) {
-                    Helper::fileDelete(public_path($executive->image));
+                if ($member->image && file_exists(public_path($member->image))) {
+                    Helper::fileDelete(public_path($member->image));
                 }
                 $validate['image'] = Helper::fileUpload($request->file('image'), 'image', time() . '_' . getFileName($request->file('image')));
             }
 
-            $executive->update($validate);
-            session()->put('t-success', 'Executive updated successfully');
+            $member->update($validate);
+            session()->put('t-success', 'Member updated successfully');
         } catch (Exception $e) {
             session()->put('t-error', $e->getMessage());
         }
 
-        return redirect()->route('admin.executive.index');
+        return redirect()->route('admin.member.index');
     }
 
     /**
@@ -171,14 +163,14 @@ class ExecutiveController extends Controller
     public function destroy(string $id)
     {
         try {
-            $data = Executive::findOrFail($id);
+            $data = Member::findOrFail($id);
             if ($data->image && file_exists(public_path($data->image))) {
                 Helper::fileDelete(public_path($data->image));
             }
             $data->delete();
             return response()->json([
                 'status' => 'success',
-                'message' => 'executive deleted successfully!'
+                'message' => 'Member deleted successfully!'
             ]);
         } catch (Exception $e) {
             return response()->json([
@@ -190,11 +182,11 @@ class ExecutiveController extends Controller
 
     public function status(int $id): JsonResponse
     {
-        $data = Executive::findOrFail($id);
+        $data = Member::findOrFail($id);
         if (!$data) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Item not found.',
+                'message' => 'Member not found.',
             ]);
         }
         $data->status = $data->status === 'active' ? 'inactive' : 'active';

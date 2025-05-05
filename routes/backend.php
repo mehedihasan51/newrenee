@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\Backend\ChatController;
 use App\Http\Controllers\Web\Backend\NewsController;
 use App\Http\Controllers\Web\Backend\PageController;
 use App\Http\Controllers\Web\Backend\PostController;
+use App\Http\Controllers\Web\Backend\MemberController;
 use App\Http\Controllers\Web\Backend\ContactController;
 use App\Http\Controllers\Web\Backend\MissionController;
 use App\Http\Controllers\Web\Backend\CategoryController;
@@ -128,6 +129,19 @@ Route::controller(MeetLeaderController::class)->prefix('leader')->name('leader.'
 
 // executive 
 Route::controller(ExecutiveController::class)->prefix('executive')->name('executive.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/show/{id}', 'show')->name('show');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::post('/update/{id}', 'update')->name('update');
+    Route::delete('/delete/{id}', 'destroy')->name('destroy');
+    Route::get('/status/{id}', 'status')->name('status');
+});
+
+// member 
+
+Route::controller(MemberController::class)->prefix('member')->name('member.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
