@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Backend\ChatController;
 use App\Http\Controllers\Web\Backend\NewsController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Web\Backend\MissionController;
 use App\Http\Controllers\Web\Backend\CategoryController;
 use App\Http\Controllers\Web\Backend\ElectionController;
 use App\Http\Controllers\Web\Backend\DashboardController;
+use App\Http\Controllers\Web\Backend\ExecutiveController;
 use App\Http\Controllers\Web\Backend\MeetLeaderController;
 use App\Http\Controllers\Web\Backend\SocialLinkController;
 use App\Http\Controllers\Web\Backend\SubscriberController;
@@ -37,6 +39,7 @@ use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\AboutSectionController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeCustomerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeContributeController;
+use App\Http\Controllers\Web\Backend\CMS\Web\Leaders\LeaderBannerController;
 
 // use App\Http\Controllers\Web\Backend\CMS\Web\News\NewsController;
 
@@ -122,6 +125,19 @@ Route::controller(MeetLeaderController::class)->prefix('leader')->name('leader.'
     Route::delete('/delete/{id}', 'destroy')->name('destroy');
     Route::get('/status/{id}', 'status')->name('status');
 });
+
+// executive 
+Route::controller(ExecutiveController::class)->prefix('executive')->name('executive.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/show/{id}', 'show')->name('show');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::post('/update/{id}', 'update')->name('update');
+    Route::delete('/delete/{id}', 'destroy')->name('destroy');
+    Route::get('/status/{id}', 'status')->name('status');
+});
+
 
 // mission
 Route::controller(MissionController::class)->prefix('mission')->name('mission.')->group(function () {
@@ -276,6 +292,21 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
         Route::put('/content', 'content')->name('content');
     });
+
+    // leader banner
+    Route::prefix('leader/banner')->name('leader.banner.')->controller(LeaderBannerController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::get('/{id}/status', 'status')->name('status');
+
+        Route::put('/content', 'content')->name('content');
+    });
+    
 
 
     //faq section

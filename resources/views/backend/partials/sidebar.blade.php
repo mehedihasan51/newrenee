@@ -195,7 +195,13 @@
                     </a>
 
                     <ul class="slide-menu">
+                        <li><a href="{{ route('admin.cms.leader.banner.index') }}" class="slide-item">Banner Section</a></li>
+                    </ul>
+                    <ul class="slide-menu">
                         <li><a href="{{ route('admin.leader.index') }}" class="slide-item">Leaders Section</a></li>
+                    </ul>
+                    <ul class="slide-menu">
+                        <li><a href="{{ route('admin.executive.index') }}" class="slide-item">Executive Section</a></li>
                     </ul>
                 </li>
 

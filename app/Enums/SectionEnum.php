@@ -11,6 +11,10 @@ enum SectionEnum: string
 
     case WHO_BANNER = 'who_banner';
     case WHO_BANNERS = 'who_banners';
+
+    // leader banner
+    case LEADER_BANNER = 'leader_banner' ;
+    case LEADER_BANNERS = 'leader_banners';
     
     case HERO = 'hero';
     case HEROS = 'heros';
@@ -37,6 +41,8 @@ enum SectionEnum: string
 
     case WHO_VALUE_SECTION = 'who_value_section';
     case WHO_VALUE_SECTIONS = 'who_value_sections';
+
+
 
 
     case NEWS_SECTION = 'news_section';
