@@ -45,8 +45,8 @@
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="category_id" class="form-label">Category:</label>
-                                                    <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="category_id">
+                                                    <label for="commitment_id" class="form-label">Category:</label>
+                                                    <select class="form-control @error('commitment_id') is-invalid @enderror" name="commitment_id" id="commitment_id">
                                                         <option value="">Select a Category ID</option>
                                                         @if(!empty($commitments) && $commitments->count() > 0)
                                                         @foreach($commitments as $item)
@@ -55,7 +55,7 @@
                                                         @endif
                                                         
                                                     </select>
-                                                    @error('category_id')
+                                                    @error('commitment_id')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
                                                 </div>
