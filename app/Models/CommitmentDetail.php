@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Commitment extends Model
+class CommitmentDetail extends Model
 {
-
     use HasFactory,SoftDeletes;
+
     protected $guarded = [];
 
-    public function CommitmentDetail()
+    public function commitment()
     {
-        return $this->hasMany(CommitmentDetail::class);
+        return $this->belongsTo(Commitment::class);
     }
 }

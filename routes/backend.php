@@ -13,17 +13,20 @@ use App\Http\Controllers\Web\Backend\CategoryController;
 use App\Http\Controllers\Web\Backend\ElectionController;
 use App\Http\Controllers\Web\Backend\DashboardController;
 use App\Http\Controllers\Web\Backend\ExecutiveController;
+use App\Http\Controllers\Web\Backend\CommitmentController;
 use App\Http\Controllers\Web\Backend\MeetLeaderController;
 use App\Http\Controllers\Web\Backend\SocialLinkController;
 use App\Http\Controllers\Web\Backend\SubscriberController;
 use App\Http\Controllers\Web\Backend\Access\RoleController;
 use App\Http\Controllers\Web\Backend\Access\UserController;
 use App\Http\Controllers\Web\Backend\ElectionDayController;
+use App\Http\Controllers\Web\Backend\LegislatorsController;
 use App\Http\Controllers\Web\Backend\SubcategoryController;
 use App\Http\Controllers\Web\Backend\Settings\OtherController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Faq\FaqController;
 use App\Http\Controllers\Web\Backend\Settings\SocialController;
 use App\Http\Controllers\Web\Backend\Settings\StripeController;
+use App\Http\Controllers\Web\Backend\CommitmentDetailController;
 use App\Http\Controllers\Web\Backend\Settings\CaptchaController;
 use App\Http\Controllers\Web\Backend\Settings\ProfileController;
 use App\Http\Controllers\Web\Backend\Settings\SettingController;
@@ -40,11 +43,9 @@ use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\AboutSectionController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeCustomerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeContributeController;
-use App\Http\Controllers\Web\Backend\CMS\Web\LeaderDetails\LeaderDetailsBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Leaders\LeaderBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Policies\PolicieBannerController;
-use App\Http\Controllers\Web\Backend\CommitmentController;
-use App\Http\Controllers\Web\Backend\LegislatorsController;
+use App\Http\Controllers\Web\Backend\CMS\Web\LeaderDetails\LeaderDetailsBannerController;
 
 // use App\Http\Controllers\Web\Backend\CMS\Web\News\NewsController;
 
@@ -207,6 +208,20 @@ Route::controller(CommitmentController::class)->prefix('commitment')->name('comm
     Route::delete('/delete/{id}', 'destroy')->name('destroy');
     Route::get('/status/{id}', 'status')->name('status');
 });
+
+// Commitment Details
+
+Route::controller(CommitmentDetailController::class)->prefix('commitment_detail')->name('commitment_detail.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/show/{id}', 'show')->name('show');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::post('/update/{id}', 'update')->name('update');
+    Route::delete('/delete/{id}', 'destroy')->name('destroy');
+    Route::get('/status/{id}', 'status')->name('status');
+});
+
 
 Route::get('subscriber', [SubscriberController::class, 'index'])->name('subscriber.index');
 
