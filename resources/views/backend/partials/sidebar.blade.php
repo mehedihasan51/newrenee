@@ -243,6 +243,18 @@
                         <li><a href="{{ route('admin.cms.leader_details.banner.index') }}" class="slide-item">Banner Section</a></li>
                     </ul>
                 </li>
+                <li class="slide">
+                    <a class="side-menu__item" data-bs-toggle="slide" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                          </svg>
+                        <span class="side-menu__label">Policies  Page</span><i class="angle fa fa-angle-right"></i>
+                    </a>
+
+                    <ul class="slide-menu">
+                        <li><a href="{{ route('admin.cms.policies.banner.index') }}" class="slide-item">Banner Section</a></li>
+                    </ul>
+                </li>
 
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="#">

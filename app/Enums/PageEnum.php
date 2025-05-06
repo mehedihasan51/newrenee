@@ -11,10 +11,16 @@ enum PageEnum: string
 
     case WHO = 'who';
 
+    
+
 
     case LEADERS = 'leaders';
 
     case LEADERS_DETAILS ='leader_details';
+    case POLICIES ='POLICIES';
+
+
+
 
     case FAQ = 'faq';
 
