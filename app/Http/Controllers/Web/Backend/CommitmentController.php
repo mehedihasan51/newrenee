@@ -107,12 +107,19 @@ class CommitmentController extends Controller
      * Display the specified resource.
      */
 
-    public function show($id)
+    public function show(Commitment $commitment, $id)
     {
         $commitment = Commitment::findOrFail($id);
         $commitment->image_url = asset('/' . $commitment->image);
-        return response()->json($commitment);
+
+        return view('backend.layouts.commitment.edit',compact('commitment'));
+        // return response()->json($commitment);
     }
+    // public function show(Category $category, $id)
+    // {
+    //     $category = $this->categoryRepository->find($id);
+    //     return view('backend.layouts.category.edit', compact('category'));
+    // }
 
     /**
      * Show the form for editing the specified resource.

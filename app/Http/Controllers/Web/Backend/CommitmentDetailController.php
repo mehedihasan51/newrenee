@@ -55,9 +55,7 @@ class CommitmentDetailController extends Controller
                                 <a href="#" type="button" onclick="goToEdit(' . $data->id . ')" class="btn btn-primary fs-14 text-white delete-icn" title="Delete">
                                     <i class="fe fe-edit"></i>
                                 </a>
-                                <a href="#" type="button" onclick="goToOpen(' . $data->id . ')" class="btn btn-success fs-14 text-white delete-icn" title="View">
-                                    <i class="fe fe-eye"></i>
-                                </a>
+                              
                                 <a href="#" type="button" onclick="showDeleteConfirm(' . $data->id . ')" class="btn btn-danger fs-14 text-white delete-icn" title="Delete">
                                     <i class="fe fe-trash"></i>
                                 </a>

@@ -16,11 +16,11 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Commitment Section</h1>
+                        <h1 class="page-title">Commitment Details Section</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Commitment Section</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Commitment Details Section</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Index</li>
                         </ol>
                     </div>
@@ -30,7 +30,7 @@
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
                     <div>
-                        <h1 class="page-title">Commitment</h1>
+                        <h1 class="page-title">Commitment Details</h1>
                     </div>
                     <div class="ms-auto pageheader-btn">
                         <ol class="breadcrumb">
