@@ -43,6 +43,7 @@ use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeContributeController;
 use App\Http\Controllers\Web\Backend\CMS\Web\LeaderDetails\LeaderDetailsBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Leaders\LeaderBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Policies\PolicieBannerController;
+use App\Http\Controllers\Web\Backend\CommitmentController;
 use App\Http\Controllers\Web\Backend\LegislatorsController;
 
 // use App\Http\Controllers\Web\Backend\CMS\Web\News\NewsController;
@@ -194,6 +195,18 @@ Route::controller(ElectionController::class)->prefix('election')->name('election
     Route::get('/status/{id}', 'status')->name('status');
 });
 
+// Commitment
+
+Route::controller(CommitmentController::class)->prefix('commitment')->name('commitment.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/show/{id}', 'show')->name('show');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::post('/update/{id}', 'update')->name('update');
+    Route::delete('/delete/{id}', 'destroy')->name('destroy');
+    Route::get('/status/{id}', 'status')->name('status');
+});
 
 Route::get('subscriber', [SubscriberController::class, 'index'])->name('subscriber.index');
 

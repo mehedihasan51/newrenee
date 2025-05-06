@@ -91,6 +91,12 @@
                         <span class="side-menu__label">Latest News</span>
                     </a>
                 </li>
+                <li class="slide">
+                    <a class="side-menu__item {{  request()->routeIs('commitment') ? 'has-link' : '' }}" href="{{ route('admin.commitment.index') }}">
+                        <i class="fa-solid fa-newspaper side-menu__icon"></i>
+                        <span class="side-menu__label">Commitment</span>
+                    </a>
+                </li>
 
                 {{-- <li class="slide">
                     <a class="side-menu__item {{  request()->routeIs('post') ? 'has-link' : '' }}" href="{{ route('admin.news.index') }}">
