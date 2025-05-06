@@ -14,6 +14,8 @@ enum PageEnum: string
 
     case LEADERS = 'leaders';
 
+    case LEADERS_DETAILS ='leader_details';
+
     case FAQ = 'faq';
 
     case NEWS = 'news';

@@ -40,6 +40,7 @@ use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\AboutSectionController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeCustomerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Home\HomeContributeController;
+use App\Http\Controllers\Web\Backend\CMS\Web\LeaderDetails\LeaderDetailsBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Web\Leaders\LeaderBannerController;
 use App\Http\Controllers\Web\Backend\LegislatorsController;
 
@@ -324,6 +325,20 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
     // leader banner
     Route::prefix('leader/banner')->name('leader.banner.')->controller(LeaderBannerController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+        Route::get('/{id}/status', 'status')->name('status');
+
+        Route::put('/content', 'content')->name('content');
+    });
+
+    // leader details banner
+    Route::prefix('leader_details/banner')->name('leader_details.banner.')->controller(LeaderDetailsBannerController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');

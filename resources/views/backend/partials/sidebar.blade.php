@@ -48,6 +48,50 @@
                         <span class="side-menu__label">Post</span>
                     </a>
                 </li>
+                <li class="slide">
+                    <a class="side-menu__item {{  request()->routeIs('post') ? 'has-link' : '' }}" href="{{ route('admin.leader.index') }}">
+                        <i class="fa-duotone fa-regular fa-user side-menu__icon"></i>
+                        <span class="side-menu__label">Our Leaders</span>
+                    </a>
+                </li>
+
+                <li class="slide">
+                    <a class="side-menu__item {{  request()->routeIs('post') ? 'has-link' : '' }}" href="{{ route('admin.election.index') }}">
+                        <i class="fa-solid fa-box side-menu__icon"></i>
+                        <span class="side-menu__label">Election Day</span>
+                    </a>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item {{  request()->routeIs('post') ? 'has-link' : '' }}" href="{{ route('admin.mission.index') }}">
+                        <i class="fa-solid fa-braille side-menu__icon"></i>
+                        <span class="side-menu__label">Mission & Vision</span>
+                    </a>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item {{  request()->routeIs('post') ? 'has-link' : '' }}" href="{{ route('admin.executive.index') }}">
+                        <i class="fa-solid fa-users side-menu__icon"></i>
+                        <span class="side-menu__label">Executive</span>
+                    </a>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item {{  request()->routeIs('member') ? 'has-link' : '' }}" href="{{ route('admin.member.index') }}">
+                        <i class="fa-regular fa-user-group side-menu__icon"></i>
+                        <span class="side-menu__label">Member</span>
+                    </a>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item {{  request()->routeIs('post') ? 'has-link' : '' }}" href="{{ route('admin.legislators.index') }}">
+                        <i class="fa-solid fa-calendar side-menu__icon"></i>
+                        <span class="side-menu__label">legislator</span>
+                    </a>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item {{  request()->routeIs('post') ? 'has-link' : '' }}" href="{{ route('admin.news.index') }}">
+                        <i class="fa-solid fa-newspaper side-menu__icon"></i>
+                        <span class="side-menu__label">Latest News</span>
+                    </a>
+                </li>
+
                 {{-- <li class="slide">
                     <a class="side-menu__item {{  request()->routeIs('post') ? 'has-link' : '' }}" href="{{ route('admin.news.index') }}">
                         <i class="fa-solid fa-blog side-menu__icon"></i>
@@ -176,19 +220,6 @@
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
-                            <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5z"/>
-                            <path d="M2 3h10v2H2zm0 3h4v3H2zm0 4h4v1H2zm0 2h4v1H2zm5-6h2v1H7zm3 0h2v1h-2zM7 8h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2z"/>
-                          </svg>
-                        <span class="side-menu__label">News Page</span><i class="angle fa fa-angle-right"></i>
-                    </a>
-
-                    <ul class="slide-menu">
-                        <li><a href="{{ route('admin.news.index') }}" class="slide-item">Latest News</a></li>
-                    </ul>
-                </li>
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                           </svg>
                         <span class="side-menu__label">Leader Page</span><i class="angle fa fa-angle-right"></i>
@@ -197,45 +228,22 @@
                     <ul class="slide-menu">
                         <li><a href="{{ route('admin.cms.leader.banner.index') }}" class="slide-item">Banner Section</a></li>
                     </ul>
-                    <ul class="slide-menu">
-                        <li><a href="{{ route('admin.leader.index') }}" class="slide-item">Leaders Section</a></li>
-                    </ul>
-                    <ul class="slide-menu">
-                        <li><a href="{{ route('admin.executive.index') }}" class="slide-item">Executive Section</a></li>
-                    </ul>
-                    <ul class="slide-menu">
-                        <li><a href="{{ route('admin.member.index') }}" class="slide-item">Member Section</a></li>
-                    </ul>
-                    <ul class="slide-menu">
-                        <li><a href="{{ route('admin.legislators.index') }}" class="slide-item">legislator Section</a></li>
-                    </ul>
-                </li>
 
+                </li>
+                
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
-                            <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm7 6h5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5"/>
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                           </svg>
-                        <span class="side-menu__label">Mission & Vision</span><i class="angle fa fa-angle-right"></i>
+                        <span class="side-menu__label">Leader Details Page</span><i class="angle fa fa-angle-right"></i>
                     </a>
 
                     <ul class="slide-menu">
-                        <li><a href="{{ route('admin.mission.index') }}" class="slide-item">Mission & Vision</a></li>
+                        <li><a href="{{ route('admin.cms.leader_details.banner.index') }}" class="slide-item">Banner Section</a></li>
                     </ul>
                 </li>
 
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.004-.001.274-.11a.75.75 0 0 1 .558 0l.274.11.004.001zm-1.374.527L8 5.962 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339Z"/>
-                          </svg>
-                        <span class="side-menu__label">Election Page</span><i class="angle fa fa-angle-right"></i>
-                    </a>
-
-                    <ul class="slide-menu">
-                        <li><a href="{{ route('admin.election.index') }}" class="slide-item">Election Day Section</a></li>
-                    </ul>
-                </li>
                 <li class="slide">
                     <a class="side-menu__item" data-bs-toggle="slide" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">

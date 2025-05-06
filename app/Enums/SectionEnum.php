@@ -15,6 +15,9 @@ enum SectionEnum: string
     // leader banner
     case LEADER_BANNER = 'leader_banner' ;
     case LEADER_BANNERS = 'leader_banners';
+
+    case LEADER_DETAILS_BANNER = 'leader_details_banner';
+    case LEADER_DETAILS_BANNERS = 'leader_details_banners';
     
     case HERO = 'hero';
     case HEROS = 'heros';
