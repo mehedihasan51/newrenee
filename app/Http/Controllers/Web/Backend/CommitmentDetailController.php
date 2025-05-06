@@ -55,7 +55,9 @@ class CommitmentDetailController extends Controller
                                 <a href="#" type="button" onclick="goToEdit(' . $data->id . ')" class="btn btn-primary fs-14 text-white delete-icn" title="Delete">
                                     <i class="fe fe-edit"></i>
                                 </a>
-                              
+                                <a href="#" type="button" onclick="event.preventDefault(); goToOpen(' . $data->id . ')" class="btn btn-success fs-14 text-white delete-icn" title="View">
+                                    <i class="fe fe-eye"></i>
+                                </a>
                                 <a href="#" type="button" onclick="showDeleteConfirm(' . $data->id . ')" class="btn btn-danger fs-14 text-white delete-icn" title="Delete">
                                     <i class="fe fe-trash"></i>
                                 </a>
@@ -124,8 +126,18 @@ class CommitmentDetailController extends Controller
     {
         $CommitmentDetail = CommitmentDetail::findOrFail($id);
         $CommitmentDetail->image_url = asset('/' . $CommitmentDetail->image);
-        return response()->json($CommitmentDetail);
+
+        return view('backend.layouts.commitment_details.show', compact('CommitmentDetail'));
+        // return response()->json($CommitmentDetail);
     }
+
+
+
+    // public function show(post $post, $id)
+    // {
+    //     $post = Post::with(['category', 'subcategory', 'user'])->where('id', $id)->first();
+    //     return view('backend.layouts.post.show', compact('post'));
+    // }
 
     /**
      * Show the form for editing the specified resource.

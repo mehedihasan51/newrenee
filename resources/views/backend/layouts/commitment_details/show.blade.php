@@ -38,22 +38,32 @@
                                 </tr>
                                 <tr>
                                     <th>Commitment</th>
-                                    <td> <a href="{{ route('admin.commitment_detail.show', $CommitmentDetail->commitment->id) }}">{{ $CommitmentDetail->commitment->name }}</a></td>
+                                    <td> <a href="{{ route('admin.commitment_detail.show', $CommitmentDetail->commitment->id) }}">{{ $CommitmentDetail->commitment->title }}</a></td>
                                 </tr>
                                 <tr>
+                                    <th>Description</th>
+                                    <td>{{ $CommitmentDetail->description ?? 'N/A' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Image</th>
+                                    <td>
+                                        @if($CommitmentDetail->image)
+                                            <img src="{{ asset($CommitmentDetail->image) }}" alt="Commitment Image" style="max-width: 150px; height: auto;">
+                                        @else
+                                            N/A
+                                        @endif
+                                    </td>
+                                </tr>
+                                {{-- <tr>
                                     <th>Images</th>
                                     <td>
-                                        @if($post->images)
-                                        @foreach ($post->images as $image)
+                                        @if($CommitmentDetail->images)
+                                        @foreach ($CommitmentDetail->images as $image)
                                         <a href="{{ asset($image->path ?? 'default/logo.png') }}" target="_blank"><img src="{{ asset($image->path ?? 'default/logo.png') }}" class="img-fluid" alt="post image" width="50" height="50"></a>
                                         @endforeach
                                         @endif
                                     </td>
-                                </tr>
-                                <tr>
-                                    <th>Content</th>
-                                    <td>{!! $CommitmentDetail->content ?? 'N/A' !!}</td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <th>Created At</th>
                                     <td>{{ $CommitmentDetail->created_at ? $CommitmentDetail->created_at : 'N/A' }}</td>
@@ -65,8 +75,8 @@
                                 <tr>
                                     <th>Action</th>
                                     <td>
-                                        <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-primary">Edit</a>
-                                        <a href="{{ route('admin.post.destroy', $post->id) }}" class="btn btn-danger">Delete</a>
+                                        <a href="{{ route('admin.commitment_detail.edit', $CommitmentDetail->id) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ route('admin.commitment_detail.destroy', $CommitmentDetail->id) }}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             </table>

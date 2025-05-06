@@ -305,5 +305,10 @@
             let url = "{{ route('admin.commitment_detail.edit', ':id') }}";
             window.location.href = url.replace(':id', id);
         }
+
+        function goToOpen(id) {
+        let url = "{{ route('admin.commitment_detail.show', ':id') }}";
+        window.location.href = url.replace(':id', id);
+    }
     </script>
 @endpush
