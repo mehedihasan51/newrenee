@@ -72,21 +72,6 @@ $url = 'admin.cms.'.$name.'.'.$section;
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="btn_text" class="form-label">Button Text:</label>
-                                            <input type="text" class="form-control @error('btn_text') is-invalid @enderror" name="btn_text" placeholder="Enter here button text" id="btn_text" value="{{ $data->btn_text ?? '' }}">
-                                            @error('btn_text')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
