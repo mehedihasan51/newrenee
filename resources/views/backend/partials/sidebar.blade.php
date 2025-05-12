@@ -93,13 +93,13 @@
                 </li>
                 <li class="slide">
                     <a class="side-menu__item {{  request()->routeIs('commitment') ? 'has-link' : '' }}" href="{{ route('admin.commitment.index') }}">
-                        <i class="fa-solid fa-newspaper side-menu__icon"></i>
+                        <i class="fa-solid fa-handshake side-menu__icon"></i>
                         <span class="side-menu__label">Commitment</span>
                     </a>
                 </li>
                 <li class="slide">
                     <a class="side-menu__item {{  request()->routeIs('commitment') ? 'has-link' : '' }}" href="{{ route('admin.commitment_detail.index') }}">
-                        <i class="fa-solid fa-newspaper side-menu__icon"></i>
+                        <i class="fa-duotone fa-solid fa-handshake side-menu__icon"></i>
                         <span class="side-menu__label">Commitment Details</span>
                     </a>
                 </li>
